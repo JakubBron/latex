@@ -1,0 +1,11 @@
+\frametitle{Prezentacje}
+Prezentacje tworzymy przy pomocy klasy \verb+beamer+. Opis klasy beamer można znaleźć pod adresem \url{https://tug.ctan.org/macros/latex/contrib/beamer/doc/beameruserguide.pdf}.
+    \medskip
+
+    Prezentacja składa ze slajdów, przeznaczonych dla widowni oraz notatek, widocznych jedynie dla prelegenta. Notatki tworzymy poleceniem \verb+\note+.
+    \medskip
+
+    Slajdy mogą zawierać automatycznie tworzone panele nawigacyjne, informację o autorze i tytule, a także informację o tym, do którego rozdziału i podrozdziału należą.
+    \medskip
+
+    Treść slajdów umieszczamy wewnątrz otoczenia \verb+\begin{frame}+ \ldots\ \verb+\end{frame}+. O stylu slajdu decyduje wybrany wcześniej, zazwyczaj w preambule, styl dokumentu.

@@ -1,0 +1,354 @@
+\documentclass[polish,envcountsect,10pt]{beamer}
+    \usepackage[T1]{fontenc}
+    \usepackage{polski}
+    \usepackage{babel}
+
+    \usetheme{EastLansing}
+
+    \title{\S\texorpdfstring{$2$}{2}. System składu tekstu {\fontfamily{lmr}\selectfont\mdseries\LaTeX}}
+    \author{Robert Janczewski}
+    \date{Gdańsk, \texorpdfstring{$2025$}{2025}}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\begin{frame}{Cechy systemu}
+    \hspace*{0pt}{\fontfamily{lmr}\selectfont\mdseries\LaTeX} to język opisu dokumentów tekstowych, umożliwiający tworzenie wysokiej jakości dokumentów zawierających tekst, formuły matematyczne i
+    grafikę.
+    \medskip
+
+    Opisując dokument przy pomocy {\fontfamily{lmr}\selectfont\mdseries\LaTeX}-a określamy jedynie jego zawartość i logiczną strukturę, a ustalenie szczegółów wyglądu zostawiamy
+    {\fontfamily{lmr}\selectfont\mdseries\LaTeX}-owi.
+    \medskip
+
+    {\fontfamily{lmr}\selectfont\mdseries\LaTeX} jest de facto zbiorem makr dla systemu {\fontfamily{lmr}\selectfont\mdseries\TeX}, który zajmuje się właściwym składem dokumentu.
+    \medskip
+
+    {\fontfamily{lmr}\selectfont\mdseries\TeX} realizuje te elementy składu, które można zautomatyzować: podział tekstu na strony, układanie tekstu i grafik na stronie, numerowanie i odwołania do
+    numerów, tworzenie spisów treści, bibliografii, indeksu itd.
+\end{frame}
+
+\begin{frame}{Narzędzia}
+    Aby skorzystać z {\fontfamily{lmr}\selectfont\mdseries\LaTeX}-a, niezbędny jest edytor tekstu i jedna z dystrybucji {\fontfamily{lmr}\selectfont\mdseries\LaTeX}-a.
+    \medskip
+
+    Lista edytorów wspierających pracę z dokumentami {\fontfamily{lmr}\selectfont\mdseries\LaTeX}-owymi jest długa, podobnie jak lista dystrybucji {\fontfamily{lmr}\selectfont\mdseries\LaTeX}-a.
+    \medskip
+
+    Dla przykładu, w systemie Windows działa MikTeX (\url{https://miktex.org/}) i TeXnicCenter (\url{http://www.texniccenter.org/}), a pod Linuksem TeXLive (\url{https://www.tug.org/texlive/}) i
+    kwrite (\url{https://www.kde.org/applications/utilities/kwrite/}).
+    \medskip
+
+    Istnieją także rozwiązania nie wymagające instalacji, ale wymagające dostępu do internetu, np.\ serwis \url{https://www.overleaf.com/}.
+\end{frame}
+
+\begin{frame}{Praca z {\fontfamily{lmr}\selectfont\mdseries\LaTeX}-em}
+    Pierwszym etapem pracy z {\fontfamily{lmr}\selectfont\mdseries\LaTeX}-em jest przygotowanie pliku źródłowego, po nim następuje kompilacja (jedno- lub wielokrotna), dająca w wyniku docelowy
+    dokument i rozmaite pliki pomocnicze.
+    \medskip
+
+    {\fontfamily{lmr}\selectfont\mdseries\LaTeX} korzysta m.in.\ z plików o następujących rozszerzeniach:
+    \begin{enumerate}
+        \item tex; plik źródłowy;
+        \item cls; pliki źródłowe klas dokumentów;
+        \item sty; pliki źródłowe pakietów makr;
+        \item dvi/pdf; docelowe dokumenty;
+        \item toc/lof/lot; spis treści, rysunków i tabel;
+        \item aux; plik wykorzystywany przy wielokrotnej kompilacji;
+        \item log; zapis przebiegu kompilacji.
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}{Praca z {\fontfamily{lmr}\selectfont\mdseries\LaTeX}-em}
+    Efektem kompilacji jest także wyświetlany na ekranie raport, zawierający informacje o błędach składni, ostrzeżeniach i błędach składu.
+    \medskip
+
+    Ostrzeżenia pojawiają się wtedy, gdy pewne czcionki są niedostępne, gdy korzystamy z przestarzałych pakietów, gdy dokonano pewnych (niekoniecznie pożądanych przez autora) korekt w dokumencie itd.
+    \medskip
+
+    Błędy składu pojawiają się wtedy, gdy algorytmom stosowanym przez {\fontfamily{lmr}\selectfont\mdseries\TeX}-a nie udało się tak ułożyć tekstu, by dobrze wyglądał.
+    \medskip
+
+    Dostajemy wówczas najlepiej według {\fontfamily{lmr}\selectfont\mdseries\TeX}-a ułożony tekst, ale musimy go zmodyfikować, jeśli chcemy by był dobrze złożony.
+    \medskip
+
+    Dobrym zwyczajem jest takie przygotowanie finalnej wersji dokumentu, żeby przy jego kompilacji nie było ostrzeżeń ani błędów składu.
+\end{frame}
+
+\begin{frame}{Schemat pliku źródłowego}
+    Typowy plik *.tex składa się z następujących fragmentów:
+    \begin{enumerate}
+        \item preambuły; preambuła musi określać klasę dokumentu i używane przez dokument pakiety, można tam także umieścić rozmaite polecenia, np.\ definiujące nowe makra i zmieniające wygląd
+            dokumentu;
+        \item dokumentu właściwego; zawiera on treść dokumentu docelowego oraz polecenia określające logiczną strukturę dokumentu.
+    \end{enumerate}
+    To, co znajduje się w preambule wpływa na wygląd dokumentu, ale nie generuje żadnej treści---ta musi znajdować się w dokumencie właściwym.
+    \medskip
+
+    Wszystko, co znajduje się po dokumencie właściwym jest ignorowane.
+\end{frame}
+
+\begin{frame}[fragile]{Przykład}
+    Poniżej znajduje się fragment preambuły i prawie pusta właściwa część dokumentu.
+    \begin{verbatim}
+\documentclass[polish,10pt]{beamer}
+    \usepackage[T1]{fontenc}
+    \usepackage{polski}
+    \usepackage{babel}
+    \newcommand{\highlight}[1]{\alert{\emph{#1}}}
+\begin{document}
+    To jest \highlight{T E S T}.
+\end{document} \end{verbatim}
+    Istnieje wiele gotowych klas dokumentów przygotowanych z myślą o różnych typach dokumentów, np.\ book i amsbook dla książek, article i amsart dla artykułów oraz beamer dla prezentacji.
+\end{frame}
+
+\begin{frame}{Tryby pracy {\fontfamily{lmr}\selectfont\mdseries\LaTeX}-a}
+    W trakcie pracy nad dokumentem {\fontfamily{lmr}\selectfont\mdseries\LaTeX} może znajdować się w jednym z poniższych trybów:
+    \begin{enumerate}
+        \item matematycznym; w tym trybie przetwarzane są formuły matematyczne, obowiązują wówczas zupełnie inne reguły składu: spacje są nieznaczące, każdy znak ma przypisaną interpretację (zmienna,
+        operator, relacja itd.), dostępne są rozmaite polecenia specjalne (greckie litery, specjalne symbole itd.);
+        \item tekstowym pionowym; w tym trybie składane są akapity, które następnie są dzielone na strony;
+        \item tekstowym poziomym; w tym trybie składany jest pojedynczy akapit, który jest dzielony na zdania, zdania na wyrazy a wyrazy na litery i ligatury.
+    \end{enumerate}
+    Tryb matematyczny trzeba włączyć ręcznie, pozostałe tryby uruchamiane są automatycznie.
+\end{frame}
+
+\begin{frame}[fragile]{Tryb tekstowy}
+    Akapity rozdzielamy pustą linią lub poleceniem \verb+\par+. Podział na linie i strony następuje automatycznie, ale można go wymusić---służą do tego polecenia \verb+\newline+ i \verb+\newpage+.
+    \medskip
+
+    Dokument to zwykły tekst, w którym znajdują się polecenia (makra). Istnieją dwa typy poleceń:
+    \begin{enumerate}
+        \item otoczenia postaci \verb+\begin{nazwa}+ \ldots\ \verb+\end{nazwa}+; otoczenie oddziaływuje wyłącznie na znajdujący się wewnątrz niego tekst;
+        \item zwykłe polecenia postaci \verb+\nazwa+; wywoływany przez polecenie efekt obowiązuje od tego momentu do końca tekstu.
+    \end{enumerate}
+    Istnieją także jednoznakowe polecenia specjalne, ich omówienie znajduje się dalej.
+\end{frame}
+
+\begin{frame}[fragile]{Tryb matematyczny}
+    Formuły otaczamy znakiem \$, powodując włączenie trybu matematycznego. Ten tryb włączany jest także przez rozmaite polecenia takie jak:
+    \begin{enumerate}
+        \item \$\$ \ldots\ \$\$ lub \verb+\begin{displaymath}+ \ldots \verb+\end{displaymath}+ lub \verb+\begin{equation*}+ \ldots \verb+\end{equation*}+; formuła zostanie złożona w postaci
+            wyśrodkowanej, w osobnym akapicie;
+        \item \verb+\begin{equation}+ \ldots \verb+\end{equation}+; formule zostanie nadany numer i zostanie ona złożona w postaci wyśrodkowanej, w osobnym akapicie;
+        \item \verb+\begin{eqnarray}+ \ldots \verb+\end{eqnarray}+; powstanie wielowierszowa formuła numerowana (z gwiazdką na końcu---nienumerowana).
+    \end{enumerate}
+    Tych poleceń nie można zagnieżdżać; \verb+\ensuremath+ wymusza użycie trybu matematycznego.
+\end{frame}
+
+\begin{frame}[fragile]{Przykłady}
+    \begin{tabular}{r|l}
+        Źródło & Dokument docelowy \\ \hline
+        \verb+$\{x\leq n\colon 2|x\}$+ & $\{x\leq n\colon 2|x\}$ \\ \hline
+        \verb+$f\colon X\to Y$+ & $f\colon X\to Y$ \\ \hline
+        \begin{tabular}{l}
+            \verb.$\mathbb{R}_+\ni x\mapsto. \\
+            \verb.f(x)=\lg x\in\mathbb{R}$.
+        \end{tabular} & $\mathbb{R}_+\ni x\mapsto f(x)=\lg x\in\mathbb{R}$ \\ \hline
+        \verb+$G=(V$, $E)$ jest grafem+ & $G=(V$, $E)$ jest grafem \\ \hline
+        \verb+$\Delta=\Theta(n)$+ & $\Delta=\Theta(n)$ \\ \hline
+        \begin{tabular}{l}
+            \verb+$A=[a_{ij}^2]_{i,j=1+ \\
+            \verb+,\ldots,n}$+
+        \end{tabular} & $A=[a_{ij}^2]_{i,j=1,\ldots,n}$ \\ \hline
+        \verb+$\frac{1}{2}\sqrt{5}$+ & $\frac{1}{2}\sqrt{5}$ \\ \hline
+        \verb+$a'$, $a''$+ & $a'$, $a''$
+    \end{tabular}
+\end{frame}
+
+\begin{frame}[fragile]{Przykłady}
+    \begin{tabular}{r|l}
+        Źródło & Dokument docelowy \\ \hline
+        \begin{tabular}{l}
+            \verb+$a=\begin{cases}+ \\
+            \verb+1\text{,}&\text{gdy }b=0\\+ \\
+            \verb+2\text{,}&\text{gdy }b\ne 0+ \\
+            \verb+\end{cases}$+
+        \end{tabular} & $a=\begin{cases} 1\text{,} & \text{gdy }b=0\\ 2\text{,} & \text{gdy }b\neq 0\end{cases}$ \\ \hline
+        \begin{tabular}{l}
+            \verb+$\displaystyle\left(+ \\
+            \verb+\frac{\sum_{i=1}^na_i}{n}+ \\
+            \verb+\right)^n\geqslant+ \\
+            \verb+\prod_{i=1}^na_i$+
+        \end{tabular} & $\displaystyle\left(\frac{\sum_{i=1}^na_i}{n}\right)^n\geqslant\prod_{i=1}^na_i$
+    \end{tabular}
+\end{frame}
+
+\begin{frame}[fragile]{Znaki specjalne}
+    Niektóre znaki mają specjalne znaczenie:
+    \begin{enumerate}
+        \item \#; używane w makrach do oznaczania argumentów, np.\ \#$1$ to pierwszy argument makra;
+        \item \%; komentarz, wszystko od tego znaku do końca linii jest ignorowane;
+        \item \$; polecenie przejścia do trybu matematycznego;
+        \item \&; separator pól w tabelach;
+        \item $\sim$; niełamliwa spacja;
+        \item \_ i \verb+^+; indeks dolny i górny (działa wyłącznie w trybie matematycznym);
+        \item \textbackslash; znak rozpoczynający polecenia;
+        \item $\{$ i $\}$; znaki otaczające parametry makr lub fragmenty tekstu;
+        \item \hspace*{0pt} [ i ]; znaki otaczające opcjonalne parametry makr.
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]{Znaki specjalne}
+    Sposoby uzyskania w tekście znaków specjalnych przedstawia poniższa tabela.
+    \begin{center}
+        \begin{tabular}{r|l}
+            Żródło & Dokument docelowy \\
+            \verb+\#+ & \# \\ \hline
+            \verb+\%+ & \% \\ \hline
+            \verb+\$+ & \$ \\ \hline
+            \verb+\&+ & \& \\ \hline
+            \verb+$\sim$+ & $\sim$ \\ \hline
+            \verb+\_+ & \_ \\ \hline
+            \verb+\verb.^.+ & \verb+^+ \\ \hline
+            \verb+\textbackslash+ & \textbackslash \\ \hline
+            \verb+$\{$+ & $\{$ \\ \hline
+            \verb+$\}$+ & $\}$
+        \end{tabular}
+    \end{center}
+\end{frame}
+
+\begin{frame}[fragile]{Listy}
+    Do tworzenia list używane są następujące otoczenia:
+    \begin{enumerate}
+        \item \verb+\begin{itemize}+ \ldots\ \verb+\end{itemize}+; tworzy listę wypunktowaną;
+        \item \verb+\begin{enumerate}+ \ldots\ \verb+\end{enumerate}+; tworzy listę numerowaną;
+        \item \verb+\begin{description}+ \ldots\ \verb+\end{description}+; tworzy listę opisową;
+    \end{enumerate}
+    Element listy zaczyna się od polecenia \verb+\item+ (\verb+\item[nazwa elementu]+ w przypadku listy opisowej).
+    \medskip
+
+    Listy można zagnieżdżać, można także zmienić znaki używane w wypunktowaniu i styl numerowania. Pakiet \verb+enumitem+ daje duże możliwości dopasowania stylu list do potrzeb.
+\end{frame}
+
+\begin{frame}[fragile]{Tabele}
+    Tabele tworzymy przy pomocy otoczenia \verb+\begin{tabular}{opis kolumn}+ \ldots\ \verb+\end{tabular}+.
+    \medskip
+
+    Opis kolumn może zawierać litery \verb+l+, \verb+r+, \verb+c+ i pionowe kreski. Litery określają sposób wyrównywania zawartości kolumn, a kreski informują, czy kolumny mają być separowane
+    pionowymi liniami.
+    \medskip
+
+    Wiersze tabeli kończymy poleceniem \verb+\\+ lub \verb+\\ \hline+, jeśli po wierszu ma być linia pozioma. Kolumny separujemy znakiem \&.
+    \medskip
+
+    Tabele są z zasady jednostronicowe. Jeśli chcemy korzystać z tabel automatycznie dzielonych między strony, należy skorzystać z odpowiedniego pakietu, np.\ \verb+longtable+.
+\end{frame}
+
+\begin{frame}[fragile]{Czcionki}
+    Do zmiany rozmiaru czcionki można użyć wbudowanych poleceń, takich jak \verb+\tiny+, \verb+\normalfont+, \verb+\large+, \verb+\Large+, \verb+\LARGE+, \verb+\huge+ i \verb+\Huge+.
+    \medskip
+
+    Zmianę stylu czcionki uzyskujemy następującymi poleceniami:
+    \begin{enumerate}
+        \item \verb+\textbf{}+ lub \verb+\bfseries+; pogrubienie;
+        \item \verb+\textmd{}+ lub \verb+\mdseries+; pismo normalnej grubości;
+        \item \verb+\textrm{}+ lub \verb+\upshape+; pismo proste;
+        \item \verb+\textit{}+ lub \verb+\itshape+; italik;
+        \item \verb+\textsl{}+ lub \verb+\slshape+; pismo pochyłe;
+        \item \verb+\textsc{}+ lub \verb+\scshape+; kapitaliki.
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]{Grafika}
+    Grafikę można dołączać z zewnętrznych plików, służy do tego polecenie \verb+\includegraphics+. Można ją także tworzyć przy pomocy pakietu \verb+tikz+.
+    \medskip
+
+    Tworzony obrazek umieszczamy wewnątrz otoczenia \verb+\begin{tikzpicture}+ \ldots\ \verb+\end{tikzpicture}+, a budujemy przy pomocy poleceń generujących proste kształty geometryczne:
+    \verb+\filldraw+, \verb+\draw+ itd.
+    \medskip
+
+    Możliwe jest przy tym nadawanie punktom etykiet i stosowanie konstrukcji programistycznych typu pętle, instrukcje warunkowe i zmienne.
+\end{frame}
+
+\begin{frame}[fragile]{Algorytmy}
+    Pakiet \verb+algorithm2e+ ułatwia zapis algorytmów w pseudokodzie. Algorytmy należy umieszczać wewnątrz otoczenia \verb+\begin{algorithm}+ \ldots\ \verb+\end{algorithm}+.
+    \medskip
+
+    Instrukcje występujące w algorytmach są generowane odpowiednimi poleceniami:
+    \begin{enumerate}
+        \item \verb+\Input{opis danych}+; opis wejścia;
+        \item \verb+\Output{opis wyniku}+; opis wyjścia;
+        \item \verb+\uIf{warunek}{instrukcje}+ i \verb+\Else{instrukcje}+; instrukcje warunkowe;
+        \item \verb+\For{zakres pętli}{instrukcje}+; pętla.
+    \end{enumerate}
+    Powyższa lista nie jest kompletna, dostępnych jest dużo innych poleceń.
+\end{frame}
+
+\begin{frame}[fragile]{Organizacja dokumentu}
+    Dostępne jednostki podziału dokumentu zależą od jego klasy.
+    \medskip
+
+    Książki oferują podział na część wstępną (\verb+\frontmatter+), główną (\verb+\mainmatter+) i tylną (\verb+\backmatter+). Oprócz tego dostępne są części (\verb+\part+), rozdziały
+    (\verb+\chapter+), podrozdziały (\verb+\section+) i mniejsze jednostki: \verb+\subsection+, \verb+\subsubsection+ i \verb+\paragraph+.
+    \medskip
+
+    Mniejsze dokumenty oferują to samo, tyle, że nie ma w nich rozdziałów i części, a całość jest traktowana jak część główna.
+\end{frame}
+
+\begin{frame}[fragile]{Etykiety i automatyczna numeracja}
+    Z każdym miejscem w tekście związany jest licznik, do którego można się dostać nadając mu etykietę.
+    \medskip
+
+    Etykietę tworzymy poleceniem \verb+\label{nazwa}+, a odczytujemy \verb+\ref{nazwa}+ (wartość) lub \verb+\pageref{nazwa}+ (numer strony, na którą trafiła).
+    \medskip
+
+    To, który licznik zostanie wykorzystany, jest ustalane automatycznie przez klasę dokumentu---wewnątrz rozdziału będzie to inny licznik niż wewnątrz twierdzenia czy rysunku.
+\end{frame}
+
+\begin{frame}[fragile]{Twierdzenia, dowody i definicje}
+    Do tworzenia otoczeń typu twierdzenie służy pakiet \verb+amsthm+.
+    \medskip
+
+    Nowy typ twierdzenia tworzymy poleceniem \verb+\newtheorem{nazwa}{napis}[licznik]+. Nazwa określa nazwę tworzonego otoczenia, napis to napis pojawiający się na jego początku.
+    \medskip
+
+    Twierdzenie, do którego nie podajemy dowodu kończymy zawsze znakiem \verb+\qed+ (w dowodach pojawia się on automatycznie na końcu).
+    \medskip
+
+    Można zmienić styl twierdzenia przy pomocy polecenia \verb+\theoremstyle+. Dowody umieszczamy wewnątrz otoczenia \verb+\begin{proof}+ \ldots\ \verb+\end{proof}+.
+\end{frame}
+
+\begin{frame}[fragile]{Tworzenie makr}
+    Nowe polecenia tworzymy pomocy polecenia \verb+\newcommand{nazwa}[liczba parametrów]{definicja}+.
+    \medskip
+
+    Nowe otoczenia tworzymy pomocy polecenia \verb+\newenvironment{nazwa}[liczba parametrów]+ \verb+{początek}{koniec}+. 
+    \medskip
+
+    ,,Początek'' jest wykonywany, kiedy w tekście pojawia się \verb+\begin{nazwa}+, a ,,koniec'', gdy pojawia się \verb+\end{nazwa}+.
+    \medskip
+
+    Można zmieniać istniejące polecenia, wystarczy zmienić \verb+new+ na \verb+renew+ w powyższych konstrukcjach.
+    \medskip
+
+    Jeśli nowe polecenie/otoczenie ma mieć parametry, to w części definiującej $i$-ty parametr widoczny jest jako \#$i$. Parametry otoczenia są widoczne wyłącznie w jego części początkowej.
+\end{frame}
+
+\begin{frame}[fragile]{Prezentacje}
+    Prezentacje tworzymy przy pomocy klasy \verb+beamer+. Opis klasy beamer można znaleźć pod adresem \url{https://tug.ctan.org/macros/latex/contrib/beamer/doc/beameruserguide.pdf}.
+    \medskip
+
+    Prezentacja składa ze slajdów, przeznaczonych dla widowni oraz notatek, widocznych jedynie dla prelegenta. Notatki tworzymy poleceniem \verb+\note+.
+    \medskip
+
+    Slajdy mogą zawierać automatycznie tworzone panele nawigacyjne, informację o autorze i tytule, a także informację o tym, do którego rozdziału i podrozdziału należą.
+    \medskip
+
+    Treść slajdów umieszczamy wewnątrz otoczenia \verb+\begin{frame}+ \ldots\ \verb+\end{frame}+. O stylu slajdu decyduje wybrany wcześniej, zazwyczaj w preambule, styl dokumentu.
+\end{frame}
+
+\begin{frame}{Książki o {\fontfamily{lmr}\selectfont\mdseries\LaTeX}-u}
+    \begin{thebibliography}{9}
+        \bibitem{Lamp} Lamport L.: ,,System opracowywania dokumentów {\fontfamily{lmr}\selectfont\mdseries\LaTeX}. Podręcznik i przewodnik użytkownika'', WNT, Warszawa $2004$.
+        \bibitem{Oet} Oetiker T., Partl H., Hyna I., Schlegl E., Przechlewski T., Kubiak R., Gołdasz J., Serwin M.: ,,Nie za krótkie wprowadzenie do systemu
+            {\fontfamily{lmr}\selectfont\mdseries\LaTeXe} albo {\fontfamily{lmr}\selectfont\mdseries\LaTeXe} w $156$ minut'',
+            \url{https://ctan.gust.org.pl/tex-archive/info/lshort/polish/lshort-pl.pdf}
+        \bibitem{Goo} Goossens M., Mittelbach F., Samarin A.: ,,The {\fontfamily{lmr}\selectfont\mdseries\LaTeX} Companion'', Addison-Wesley $1994$.
+        \bibitem{Rah} Goossens M., Rahtz S., Mittelbach F.: ,,The {\fontfamily{lmr}\selectfont\mdseries\LaTeX} Graphics Companion. Illustrating documents with
+            {\fontfamily{lmr}\selectfont\mdseries\TeX} and PostScript'', Addison-Wesley $1997$.
+    \end{thebibliography}
+\end{frame}
+
+\end{document}
