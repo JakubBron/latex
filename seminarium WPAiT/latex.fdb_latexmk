@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1761561158.65694 "c:/STUDIA PG/latex/seminarium WPAiT/latex.tex" "latex.pdf" "latex" 1761561161.10469 0
+["pdflatex"] 1761582785.46759 "c:/STUDIA PG/latex/seminarium WPAiT/latex.tex" "latex.pdf" "latex" 1761582789.26664 0
   "C:/Users/Kuba_loc/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1761306598 81088 29d6fa367ac022d1b69251d68c0742e6 ""
   "C:/Users/Kuba_loc/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/ecsi1000.pk" 1761315162 24544 73fae27988e13c7a42778f086321dc07 ""
   "C:/Users/Kuba_loc/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/ecss0500.pk" 1761306605 10824 77266f4172320ff5a25d50c733d1a08a ""
@@ -238,12 +238,12 @@
   "C:/Users/Kuba_loc/AppData/Local/Programs/MiKTeX/tex/latex/translator/translator.sty" 1622471510 8765 56d370785f0143111ff9898b5adfe08e ""
   "C:/Users/Kuba_loc/AppData/Local/Programs/MiKTeX/tex/latex/url/url.sty" 1388490452 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
   "C:/Users/Kuba_loc/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1700127522 55487 80a65caedd3722f4c20a14a69e785d8f ""
-  "c:/STUDIA PG/latex/seminarium WPAiT/latex.tex" 1761561155 26034 e2717f94cf5758043f935cf98d19929b ""
+  "c:/STUDIA PG/latex/seminarium WPAiT/latex.tex" 1761582784 26038 7b430766a5e91c3d1c279b6c0a375e6a ""
   "dh.png" 1761499978 180707 7619040030541ba9b41279254e93be49 ""
-  "latex.aux" 1761561160 5844 7902a66565bae2be9c5d991f51689736 "pdflatex"
-  "latex.nav" 1761561160 2969 c29227b41a7d262f37acf4ae04cb5912 "pdflatex"
-  "latex.out" 1761561159 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
-  "latex.tex" 1761561155 26034 e2717f94cf5758043f935cf98d19929b ""
+  "latex.aux" 1761582788 5844 7902a66565bae2be9c5d991f51689736 "pdflatex"
+  "latex.nav" 1761582788 2969 c29227b41a7d262f37acf4ae04cb5912 "pdflatex"
+  "latex.out" 1761582787 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+  "latex.tex" 1761582784 26038 7b430766a5e91c3d1c279b6c0a375e6a ""
   (generated)
   "latex.aux"
   "latex.log"
